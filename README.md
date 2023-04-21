@@ -28,7 +28,7 @@ We develop this project with the following docker version: `20.10.22`
     npm run docker:run
 ```
 
-- Open a browser and type the following URL: `http://localhost:49127`
+- Open a browser and type the following URL: `http://localhost:49129`
 
 ## :gem: Run tests
 
