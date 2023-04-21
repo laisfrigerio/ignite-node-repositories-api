@@ -1,9 +1,12 @@
 {
-  "name": "c03",
+  "name": "ignite-node-repositories-api",
   "version": "1.0.0",
   "main": "src/server.js",
   "license": "MIT",
   "scripts": {
+    "docker:build": "docker build . -t ignite-node-repositories-api",
+    "docker:run": "docker run -p 127.0.0.1:49129:3333 -d ignite-node-repositories-api",
+    "docker:test": "docker run -e CI=true ignite-node-repositories-api npm run test",
     "prettier:fix": "npx prettier --write .",
     "dev": "nodemon",
     "test": "jest"
