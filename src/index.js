@@ -11,7 +11,7 @@ let repositories = [];
 const findRepositoryByID = (request, response, next) => {
   const { id } = request.params;
 
-  const repository = repositories.find(repository => repository.id === id);
+  const repository = repositories.find((repository) => repository.id === id);
 
   if (!repository) {
     return response.status(404).json({ error: "Repository not found" });
@@ -19,7 +19,7 @@ const findRepositoryByID = (request, response, next) => {
 
   request.repository = repository;
   return next();
-}
+};
 
 app.get("/repositories", (_, response) => {
   return response.json(repositories);
@@ -33,7 +33,7 @@ app.post("/repositories", (request, response) => {
     title,
     url,
     techs,
-    likes: 0
+    likes: 0,
   };
 
   repositories.push(repository);
@@ -55,7 +55,7 @@ app.put("/repositories/:id", findRepositoryByID, (request, response) => {
 app.delete("/repositories/:id", findRepositoryByID, (request, response) => {
   const { id } = request.params;
 
-  repositories = repositories.filter(repository => repository.id !== id);
+  repositories = repositories.filter((repository) => repository.id !== id);
 
   return response.status(204).send();
 });
