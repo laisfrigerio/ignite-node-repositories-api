@@ -8,12 +8,25 @@ app.use(express.json());
 
 let repositories = [];
 
+const findRepositoryByID = (request, response, next) => {
+  const { id } = request.params;
+
+  const repository = repositories.find(repository => repository.id === id);
+
+  if (!repository) {
+    return response.status(404).json({ error: "Repository not found" });
+  }
+
+  request.repository = repository;
+  return next();
+}
+
 app.get("/repositories", (_, response) => {
   return response.json(repositories);
 });
 
 app.post("/repositories", (request, response) => {
-  const { title, url, techs } = request.body
+  const { title, url, techs } = request.body;
 
   const repository = {
     id: uuid(),
@@ -28,45 +41,27 @@ app.post("/repositories", (request, response) => {
   return response.status(201).json({ ...repository });
 });
 
-app.put("/repositories/:id", (request, response) => {
-  const { id } = request.params;
+app.put("/repositories/:id", findRepositoryByID, (request, response) => {
+  const { repository } = request;
   const { title, url, techs } = request.body;
 
-  const repository = repositories.find(repository => repository.id === id);
-
-  if (!repository) {
-    return response.status(404).json({ error: "Repository not found" });
-  }
-
-  repository.title = title
-  repository.url = url
-  repository.techs = techs
+  repository.title = title;
+  repository.url = url;
+  repository.techs = techs;
 
   return response.status(200).json(repository);
 });
 
-app.delete("/repositories/:id", (request, response) => {
+app.delete("/repositories/:id", findRepositoryByID, (request, response) => {
   const { id } = request.params;
 
-  const repository = repositories.find(repository => repository.id === id);
-
-  if (!repository) {
-    return response.status(404).json({ error: "Repository not found" });
-  }
-
-  repositories = repositories.filter(repository => repository.id !== id)
+  repositories = repositories.filter(repository => repository.id !== id);
 
   return response.status(204).send();
 });
 
-app.post("/repositories/:id/like", (request, response) => {
-  const { id } = request.params;
-
-  const repository = repositories.find(repository => repository.id === id);
-
-  if (!repository) {
-    return response.status(404).json({ error: "Repository not found" });
-  }
+app.post("/repositories/:id/like", findRepositoryByID, (request, response) => {
+  const { repository } = request;
 
   ++repository.likes;
 
