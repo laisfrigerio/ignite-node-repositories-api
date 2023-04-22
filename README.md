@@ -2,6 +2,14 @@
 
 A NodeJS API to management projects/repositories.
 
+The main idea of this challenge is to refactor an application that is already developed and has integration tests tests it.
+
+After some changes in the application code, part of the tests failed and now only you can solve this problem. Let's go there? 🚀
+
+This application performs CRUD (**C**reate, **R**ead, **U**pdate, **D**elete) of project repositories. In addition, it is possible to give likes to registered repositories, increasing the number of likes by 1 each time the route is called.
+
+The main idea of this repository is a refa
+
 ## 🛠️ Stack
 
 - nodejs: 18 + express
