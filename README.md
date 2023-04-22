@@ -8,8 +8,6 @@ After some changes in the application code, part of the tests failed and now onl
 
 This application performs CRUD (**C**reate, **R**ead, **U**pdate, **D**elete) of project repositories. In addition, it is possible to give likes to registered repositories, increasing the number of likes by 1 each time the route is called.
 
-The main idea of this repository is a refa
-
 ## 🛠️ Stack
 
 - nodejs: 18 + express
